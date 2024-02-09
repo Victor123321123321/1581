@@ -20,7 +20,7 @@ for i in f:
 for i in range(1, len(spisok)):
     t = spisok[i]
     j = i - 1
-    while j >= 0 and t.score < spisok[j].score:
+    while j >= 0 and t.score > spisok[j].score:
         spisok[j + 1] = spisok[j]
         j -= 1
     spisok[j + 1] = t

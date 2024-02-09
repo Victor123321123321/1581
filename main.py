@@ -4,7 +4,9 @@ class Student():
         self.Name = inf[1].split()
         self.title = inf[2]
         self.clas = inf[3]
-        self.score = inf[4]
+        if inf[4] == "None\n":
+            inf[4] = "5"
+        self.score = int(inf[4])
 
 
 f = open("students.csv")
@@ -16,14 +18,15 @@ for i in f:
     spisok.append(s)
 
 for i in range(1, len(spisok)):
-    t = spisok[i].id
+    t = spisok[i]
     j = i - 1
-    while j >=0 and t < spisok[j].id:
-        spisok[j + 1].id = spisok[j].id
+    while j >= 0 and t.score < spisok[j].score:
+        spisok[j + 1] = spisok[j]
         j -= 1
-    spisok[j + 1].id = t
+    spisok[j + 1] = t
 
 n = 1
+print("10 класс:")
 for i in range(len(spisok)):
     if spisok[i].clas[:2] == "10":
         print(str(n) + " место: " + spisok[i].Name[1][0] + '.', spisok[i].Name[0])

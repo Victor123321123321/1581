@@ -1,3 +1,4 @@
+import random
 class Student():
     def __init__(self, inf):
         self.id = inf[0]
@@ -5,11 +6,23 @@ class Student():
         self.title = inf[2]
         self.clas = inf[3]
         if inf[4] == "None\n":
-            inf[4] = "5"
+            inf[4] = "1"
         self.score = int(inf[4])
+        self.login = generate_login(self.Name)
+        self.password = generate_password()
+        print(self.login, self.password)
+
+def generate_login(name):
+    return name[0] + "_" + name[1][0] + name[2][0]
+
+def generate_password():
+    st = ''
+    for i in range(8):
+        st += "1234567890QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm"[random.randint(0, 61)]
+    return st
 
 
-f = open("students.csv")
+f = open(input())
 f.readline()
 spisok = []
 for i in f:
@@ -17,19 +30,7 @@ for i in f:
     s = Student(inf)
     spisok.append(s)
 
-for i in range(1, len(spisok)):
-    t = spisok[i]
-    j = i - 1
-    while j >= 0 and t.score > spisok[j].score:
-        spisok[j + 1] = spisok[j]
-        j -= 1
-    spisok[j + 1] = t
+f2 = open("students_password.csv")
+for i in spisok:
+    pass
 
-n = 1
-print("10 класс:")
-for i in range(len(spisok)):
-    if spisok[i].clas[:2] == "10":
-        print(str(n) + " место: " + spisok[i].Name[1][0] + '.', spisok[i].Name[0])
-        n += 1
-    if n == 4:
-        break

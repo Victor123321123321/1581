@@ -1,14 +1,15 @@
 import random
+import csv
 class Student():
     def __init__(self, inf):
         self.id = inf[0]
-        self.Name = inf[1].split()
+        self.Name = inf[1]
         self.title = inf[2]
         self.clas = inf[3]
         if inf[4] == "None\n":
             inf[4] = "1"
         self.score = int(inf[4])
-        self.login = generate_login(self.Name)
+        self.login = generate_login(self.Name.split())
         self.password = generate_password()
         print(self.login, self.password)
 
@@ -30,7 +31,7 @@ for i in f:
     s = Student(inf)
     spisok.append(s)
 
-f2 = open("students_password.csv")
-for i in spisok:
-    pass
-
+with open("students_password.csv", mode="w", encoding='utf-8') as w_file:
+    file_writer = csv.writer(w_file, delimiter=",", lineterminator="\r")
+    for i in spisok:
+        file_writer.writerow([i.id, i.Name, i.title, i.clas, i.score, i.login, i.password])

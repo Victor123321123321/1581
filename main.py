@@ -33,4 +33,3 @@ for i in f:
 f2 = open("students_password.csv")
 for i in spisok:
     pass
-
